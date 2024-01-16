@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 """
 nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
@@ -54,7 +53,7 @@ class Discriminator(nn.Module):
         #     nn.Flatten(),
         #     nn.Sigmoid()
         # )
-
+        self.ngpu = 1
         self.main = nn.Sequential(
         # in: 3 x 64 x 64
 
@@ -85,4 +84,9 @@ class Discriminator(nn.Module):
         nn.Sigmoid())
   
     def forward(self, x):
+        # gpu_ids = None
+        # if isinstance(input.data, torch.cuda.FloatTensor) and self.ngpu > 1:
+        #     gpu_ids = range(self.ngpu)
+        # output = nn.parallel.data_parallel(self.main, input, gpu_ids)
+        # return output.view(-1, 1)
         return self.main(x)

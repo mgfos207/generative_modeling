@@ -83,7 +83,7 @@ class AnimeGAN:
     def __init__(self, dl, fixed_latent):
         self.dl = dl
         self.fixed_latent = fixed_latent
-        self.latent_size = 128
+        self.latent_size = 64
         self.batch_size = 20
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
         # self.discriminator = self.to_device(self.create_discriminator())
@@ -133,7 +133,7 @@ class AnimeGAN:
         # Pass real images through discriminator
         real_preds = self.discriminator(real_images)
         real_targets = torch.ones(real_images.size(0), 1, device=self.device)
-        real_targets = real_targets.squeeze()
+        # real_targets = real_targets.squeeze()
         # real_loss = F.binary_cross_entropy(real_preds, real_targets)
         real_loss = disc_criterion(real_preds, real_targets)
         real_score = torch.mean(real_preds).item()
@@ -164,7 +164,7 @@ class AnimeGAN:
         
         # Try to fool the discriminator
         preds = self.discriminator(fake_images)
-        targets = torch.ones(batch_size, 1, device=self.device)
+        targets = torch.ones(self.batch_size, 1, device=self.device)
         loss = F.binary_cross_entropy(preds, targets)
         
         # Update generator weights
