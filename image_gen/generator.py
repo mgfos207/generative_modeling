@@ -32,7 +32,6 @@ class Generator(nn.Module):
             nn.Tanh()
             # out: 3 x 64 x 64
         )
-    
 
     def forward(self, x):
         return self.main(x)

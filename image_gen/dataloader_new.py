@@ -84,7 +84,7 @@ class AnimeGAN:
         self.dl = dl
         self.fixed_latent = fixed_latent
         self.latent_size = 64
-        self.batch_size = 20
+        self.batch_size = 128
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
         # self.discriminator = self.to_device(self.create_discriminator())
         # self.generator = self.to_device(self.create_generator())
